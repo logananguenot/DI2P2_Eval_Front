@@ -1,0 +1,33 @@
+<p-table
+  #eventList
+  [value]="eventData"
+  [tableStyle]="{ 'min-width': '50rem' }"
+  [globalFilterFields]="['date']"
+>
+  <ng-template pTemplate="caption">
+    <div class="flex">
+      <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(eventList)"></button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Date<p-columnFilter type="date" field="date" display="menu"></p-columnFilter></th>
+      <th>Location</th>
+      <th>Action</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-event>
+    <tr>
+      <td>{{ event.title }}</td>
+      <td>{{ event.description }}</td>
+      <td>{{ event.date }}</td>
+      <td>{{ event.location }}</td>
+      <td>
+        <button pButton type="button" label="Edit">Edit</button>
+        <button pButton type="button" label="Delete">Delete</button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
