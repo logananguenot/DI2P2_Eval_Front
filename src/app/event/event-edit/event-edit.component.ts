@@ -1,20 +1,20 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {DynamicDialogRef} from "primeng/dynamicdialog";
-import {IEvent} from "../../interfaces/ievent";
 import {EventServiceService} from "../../services/events/event-service.service";
+import {DynamicDialogRef} from "primeng/dynamicdialog";
 
 @Component({
-  selector: 'app-event-create',
-  templateUrl: './event-create.component.html',
-  styleUrls: ['./event-create.component.scss']
+  selector: 'app-event-edit',
+  templateUrl: './event-edit.component.html',
+  styleUrls: ['./event-edit.component.scss']
 })
-export class EventCreateComponent implements OnInit {
+export class EventEditComponent implements OnInit {
   eventForm!: FormGroup;
+
   constructor(
     public dialogRef: DynamicDialogRef,
     private _eventService: EventServiceService
-  ) { }
+) { }
 
   ngOnInit(): void {
     this.eventForm = new FormGroup({
@@ -25,15 +25,9 @@ export class EventCreateComponent implements OnInit {
     });
   }
 
-  onSubmitAdd() {
+  onSubmitEdit() {
     const eventFormData = this.eventForm.value;
-    const newEvent: IEvent = {
-      Title: eventFormData.title,
-      Description: eventFormData.description,
-      Date: eventFormData.date,
-      Location: eventFormData.location
-    }
-    this._eventService.addEvent(newEvent).then((result) => {
+    this._eventService.editEvent(eventFormData).then((result) => {
       this.dialogRef.destroy();
     });
   }

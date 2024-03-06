@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Table} from "primeng/table";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {EventCreateComponent} from "../event-create/event-create.component";
+import {IIEvent} from "../../interfaces/iievent";
+import {EventServiceService} from "../../services/events/event-service.service";
 
 @Component({
   selector: 'app-event-list',
@@ -9,29 +11,14 @@ import {EventCreateComponent} from "../event-create/event-create.component";
   styleUrls: ['./event-list.component.scss']
 })
 export class EventListComponent implements OnInit{
-  eventData = [
-    {
-    title: 'Event 1',
-    description: 'I am a event description',
-    date: '06/03/2024',
-    location: 'Dijon'
-    },
-    {
-      title: 'Event 2',
-      description: 'I am a event description',
-      date: '20/05/2020',
-      location: 'Paris'
-    },
-    {
-      title: 'Event 3',
-      description: 'I am a event description',
-      date: '01/01/2035',
-      location: 'Lyon'
-    }];
+  eventData: IIEvent[] = [];
 
   ref: DynamicDialogRef | undefined;
 
-  constructor(public dialogService: DialogService) {
+  constructor(
+    public dialogService: DialogService,
+    private _eventService: EventServiceService
+  ) {
   }
 
   ngOnInit() {
@@ -41,8 +28,25 @@ export class EventListComponent implements OnInit{
     table.clear();
   }
 
+  getEvents() {
+    this._eventService.getEvents().then(
+      (data: IIEvent[]) => {
+        this.eventData = data;
+      }
+    )
+  }
+
   showAddDialog() {
-    console.log("opened")
     this.ref = this.dialogService.open(EventCreateComponent, {header: 'Add a new Event'})
+  }
+
+  showEditDialog(event: IIEvent) {
+    this.ref = this.dialogService.open(EventCreateComponent, {header: 'Edit Event', data: event})
+  }
+
+  deleteEvent(event: IIEvent) {
+    this._eventService.deleteEvent(event).then((result) => {
+      console.log(result)
+    });
   }
 }

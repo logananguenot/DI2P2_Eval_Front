@@ -26,8 +26,8 @@
       <td>{{ event.date }}</td>
       <td>{{ event.location }}</td>
       <td>
-        <button pButton type="button" label="Edit">Edit</button>
-        <button pButton type="button" label="Delete">Delete</button>
+        <button pButton type="button" label="Edit" (click)="showEditDialog(event)">Edit</button>
+        <button pButton type="button" label="Delete" (click)="deleteEvent(event)">Delete</button>
       </td>
     </tr>
   </ng-template>
