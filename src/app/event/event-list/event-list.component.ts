@@ -1,12 +1,14 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Table} from "primeng/table";
+import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
+import {EventCreateComponent} from "../event-create/event-create.component";
 
 @Component({
   selector: 'app-event-list',
   templateUrl: './event-list.component.html',
   styleUrls: ['./event-list.component.scss']
 })
-export class EventListComponent {
+export class EventListComponent implements OnInit{
   eventData = [
     {
     title: 'Event 1',
@@ -25,9 +27,22 @@ export class EventListComponent {
       description: 'I am a event description',
       date: '01/01/2035',
       location: 'Lyon'
-    }]
+    }];
+
+  ref: DynamicDialogRef | undefined;
+
+  constructor(public dialogService: DialogService) {
+  }
+
+  ngOnInit() {
+  }
 
   clear(table: Table) {
     table.clear();
+  }
+
+  showAddDialog() {
+    console.log("opened")
+    this.ref = this.dialogService.open(EventCreateComponent, {header: 'Add a new Event'})
   }
 }
