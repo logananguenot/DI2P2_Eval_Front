@@ -10,12 +10,14 @@ import { EventCreateComponent } from './event/event-create/event-create.componen
 import {DialogModule} from "primeng/dialog";
 import {DialogService} from "primeng/dynamicdialog";
 import {ReactiveFormsModule} from "@angular/forms";
+import { EventEditComponent } from './event/event-edit/event-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     EventListComponent,
-    EventCreateComponent
+    EventCreateComponent,
+    EventEditComponent
   ],
   imports: [
     BrowserModule,

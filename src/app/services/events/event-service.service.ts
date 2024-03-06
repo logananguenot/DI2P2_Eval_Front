@@ -10,9 +10,19 @@ export class EventServiceService {
 
   constructor(private _httpRequest: HttpRequestService) { }
 
+
+  getEvents() {
+    return new Promise<IIEvent[]>((resolve, reject) => {
+      this._httpRequest.get<IIEvent[]>('/Events').subscribe({
+        next: (response) => resolve(response),
+        error: (err) => reject(err),
+      });
+    });
+  }
+
   addEvent(event: IEvent) {
     return new Promise<IEvent>((resolve, reject) => {
-      this._httpRequest.post<IEvent>('Events', event).subscribe({
+      this._httpRequest.post<IEvent>('/Events', event).subscribe({
         next: (result) => {
           resolve(result);
         },
@@ -25,12 +35,25 @@ export class EventServiceService {
 
   editEvent(event: IIEvent) {
     return new Promise<IIEvent>((resolve, reject) => {
-      return this._httpRequest.update<any>('/event', event).subscribe({
+      return this._httpRequest.update<any>('/Events', event).subscribe({
         next: (result) => {
           resolve(result);
         },
         error: (error) => {
           reject(error);
+        },
+      });
+    });
+  }
+
+  deleteEvent(event: IIEvent) {
+    return new Promise<IIEvent>((resolve, reject) => {
+      return this._httpRequest.delete<IIEvent>(`/Events`, event).subscribe({
+        next: (result) => {
+          resolve(result);
+        },
+        error: (err) => {
+          reject(err);
         },
       });
     });
