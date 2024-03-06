@@ -11,6 +11,7 @@ import {DialogModule} from "primeng/dialog";
 import {DialogService} from "primeng/dynamicdialog";
 import {ReactiveFormsModule} from "@angular/forms";
 import { EventEditComponent } from './event/event-edit/event-edit.component';
+import {HttpRequestService} from "../utils/http-request.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,10 @@ import { EventEditComponent } from './event/event-edit/event-edit.component';
     DialogModule,
     ReactiveFormsModule
   ],
-  providers: [DialogService],
+  providers: [
+    DialogService,
+    HttpRequestService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

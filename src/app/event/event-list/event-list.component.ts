@@ -22,18 +22,15 @@ export class EventListComponent implements OnInit{
   }
 
   ngOnInit() {
-  }
-
-  clear(table: Table) {
-    table.clear();
-  }
-
-  getEvents() {
     this._eventService.getEvents().then(
       (data: IIEvent[]) => {
         this.eventData = data;
       }
     )
+  }
+
+  clear(table: Table) {
+    table.clear();
   }
 
   showAddDialog() {
