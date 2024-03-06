@@ -1,0 +1,7 @@
+<form [formGroup]="eventForm" (submit)="onSubmitAdd()">
+  <input formControlName="title" type="text" placeholder="Title" required>
+  <input formControlName="description" type="text" placeholder="Description" required>
+  <input formControlName="date" type="date" required>
+  <input formControlName="location" type="text" placeholder="Location" required>
+  <button type="submit">Add</button>
+</form>

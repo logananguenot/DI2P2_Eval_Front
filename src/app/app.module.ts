@@ -6,19 +6,26 @@ import { AppComponent } from './app.component';
 import { EventListComponent } from './event/event-list/event-list.component';
 import {TableModule} from "primeng/table";
 import {ButtonModule} from "primeng/button";
+import { EventCreateComponent } from './event/event-create/event-create.component';
+import {DialogModule} from "primeng/dialog";
+import {DialogService} from "primeng/dynamicdialog";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
-    EventListComponent
+    EventListComponent,
+    EventCreateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     TableModule,
-    ButtonModule
+    ButtonModule,
+    DialogModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [DialogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
