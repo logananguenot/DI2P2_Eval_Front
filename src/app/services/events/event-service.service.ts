@@ -48,7 +48,7 @@ export class EventServiceService {
 
   deleteEvent(event: IIEvent) {
     return new Promise<IIEvent>((resolve, reject) => {
-      return this._httpRequest.delete<IIEvent>(`/Events`, event).subscribe({
+      return this._httpRequest.delete<any>(`/Events`, event).subscribe({
         next: (result) => {
           resolve(result);
         },
