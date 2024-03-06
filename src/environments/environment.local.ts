@@ -1,5 +1,5 @@
 export const environment = {
-  env : "development",
+  env : "local",
 
   apiEndpoint: "",
 };
