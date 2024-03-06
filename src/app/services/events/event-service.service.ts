@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {IEvent} from "../../interfaces/ievent";
 import {HttpRequestService} from "../../../utils/http-request.service";
+import {IIEvent} from "../../interfaces/iievent";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class EventServiceService {
 
   addEvent(event: IEvent) {
     return new Promise<IEvent>((resolve, reject) => {
-      this._httpRequest.post<IEvent>('event/add', event).subscribe({
+      this._httpRequest.post<IEvent>('Events', event).subscribe({
         next: (result) => {
           resolve(result);
         },
@@ -20,5 +21,18 @@ export class EventServiceService {
         },
       });
     })
+  }
+
+  editEvent(event: IIEvent) {
+    return new Promise<IIEvent>((resolve, reject) => {
+      return this._httpRequest.update<any>('/event', event).subscribe({
+        next: (result) => {
+          resolve(result);
+        },
+        error: (error) => {
+          reject(error);
+        },
+      });
+    });
   }
 }
